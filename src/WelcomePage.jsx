@@ -1,28 +1,34 @@
-import axios from 'axios';
+import emailjs from 'emailjs-com';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const WelcomePage = () => {
-  // State variables to store user input
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
-  
-  // Hook to navigate programmatically
   const navigate = useNavigate();
 
-  // Function to handle user registration
   const handleRegister = async () => {
-    // Check if all fields are filled
     if (username && email && firstname && lastname) {
+      const templateParams = {
+        username,
+        email,
+        firstname,
+        lastname,
+      };
+
       try {
-        // Send a POST request to the registration API
-        await axios.post('/api/register', { username, email, firstname, lastname });
+        await emailjs.send(
+          'service_0p72t0b', // Replace with your EmailJS service ID
+          'template_q7m4kra', // Replace with your EmailJS template ID
+          templateParams,
+          'J5erP2mRMNmEdNgsi' // Replace with your EmailJS user ID
+        );
         alert('Registration successful! Check your email for details.');
         navigate('/'); // Navigate to the home page
       } catch (error) {
-        console.error('Error registering:', error);
+        console.error('Error sending email:', error);
         alert('Registration failed. Please try again.');
       }
     } else {
