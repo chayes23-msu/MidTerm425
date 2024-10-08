@@ -3,15 +3,21 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const WelcomePage = () => {
+  // State variables to store user input
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
+  
+  // Hook to navigate programmatically
   const navigate = useNavigate();
 
+  // Function to handle user registration
   const handleRegister = async () => {
+    // Check if all fields are filled
     if (username && email && firstname && lastname) {
       try {
+        // Send a POST request to the registration API
         await axios.post('/api/register', { username, email, firstname, lastname });
         alert('Registration successful! Check your email for details.');
         navigate('/'); // Navigate to the home page

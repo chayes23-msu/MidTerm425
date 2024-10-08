@@ -2,14 +2,21 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
+  // State variables for username and password
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  
+  // Hook to navigate programmatically
   const navigate = useNavigate();
 
+  // Function to handle login
   const handleLogin = () => {
+    // Check if both username and password are provided
     if (username && password) {
-      navigate('/landing'); // Navigate to the landing page
+      // Navigate to the landing page
+      navigate('/landing');
     } else {
+      // Alert the user to enter both username and password
       alert('Please enter both username and password');
     }
   };
@@ -24,7 +31,7 @@ const LoginPage = () => {
           <input
             type="text"
             value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            onChange={(e) => setUsername(e.target.value)} // Update username state
           />
         </label>
       </div>
@@ -34,7 +41,7 @@ const LoginPage = () => {
           <input
             type="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)} // Update password state
           />
         </label>
       </div>
