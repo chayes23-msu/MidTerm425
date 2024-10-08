@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -8,10 +9,16 @@ const WelcomePage = () => {
   const [lastname, setLastname] = useState('');
   const navigate = useNavigate();
 
-  const handleRegister = () => {
+  const handleRegister = async () => {
     if (username && email && firstname && lastname) {
-      alert('Registration successful!');
-      navigate('/'); // Navigate to the home page
+      try {
+        await axios.post('/api/register', { username, email, firstname, lastname });
+        alert('Registration successful! Check your email for details.');
+        navigate('/'); // Navigate to the home page
+      } catch (error) {
+        console.error('Error registering:', error);
+        alert('Registration failed. Please try again.');
+      }
     } else {
       alert('Please fill in all fields');
     }
