@@ -6,8 +6,8 @@ import Mailjet from 'node-mailjet';
 dotenv.config();
 
 const mailjetClient = new Mailjet({
-  apiKey: '9afb2eb693f8d2af70c4085d497d81cf',
-  apiSecret: '50624846d5f59e9ebf6750e659b13013',
+  apiKey: 'would be here',
+  apiSecret: 'would be here',
 });
 
 const app = express();
